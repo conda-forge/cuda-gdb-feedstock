@@ -43,8 +43,10 @@ outputs:
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
       host:
         - cuda-version {{ cuda_version }}
-        - expat                                 # [aarch64]
+        - expat                                 # [aarch64 or ppc64le]
         - gmp
+        - mpfr                                  # [ppc64le]
+        - ncurses                               # [ppc64le]
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
       run_constrained:
