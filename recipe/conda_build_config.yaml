@@ -1,2 +1,7 @@
 arm_variant_type: # [aarch64]
   - sbsa          # [aarch64]
+
+mpfr:             # [ppc64le]
+  - 4             # [ppc64le]
+ncurses:          # [ppc64le]
+  - 5             # [ppc64le]
