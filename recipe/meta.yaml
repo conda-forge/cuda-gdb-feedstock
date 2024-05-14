@@ -18,7 +18,7 @@ source:
   sha256: 99fb61a444bc05709bab18288661cd87104c08671e66b61cb7abe096cd008c64  # [aarch64]
 
 build:
-  number: 1
+  number: 2
   skip: true  # [osx or win]
 
 test:
@@ -40,6 +40,7 @@ outputs:
       build:
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}
+        - {{ stdlib("c") }}
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
       host:
         - cuda-version {{ cuda_version }}

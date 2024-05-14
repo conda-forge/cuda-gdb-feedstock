@@ -8,3 +8,7 @@ github:
   tooling_branch_name: main
 provider:
   linux_aarch64: default
+os_version:
+  linux_64: cos7
+  linux_aarch64: cos7
+  linux_ppc64le: cos7
