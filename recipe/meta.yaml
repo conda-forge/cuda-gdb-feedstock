@@ -1,6 +1,6 @@
 {% set name = "cuda-gdb" %}
-{% set version = "12.5.82" %}
-{% set cuda_version = "12.5" %}
+{% set version = "12.6.37" %}
+{% set cuda_version = "12.6" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-ppc64le" %}  # [ppc64le]
 {% set platform = "linux-sbsa" %}  # [aarch64]
@@ -13,8 +13,8 @@ package:
 
 source:
   url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_gdb/{{ platform }}/cuda_gdb-{{ platform }}-{{ version }}-archive.{{ extension }}
-  sha256: 25bc68ff2ec6133ad7271aece6535f4820b057821421d16932a8c9080b162520  # [linux64]
-  sha256: 0cecc82647b80b42c3e7cd934485407588d0143917ebd3673bfaf935855ef252  # [aarch64]
+  sha256: 67eacd5a8800656e7fe5da2e13a3f8ae44c77f8602044cd698c2b7089e1e1def  # [linux64]
+  sha256: ede4cc0df5d9e926cc32d89bacd83959ba10995517e1a9f3a34cfdde2d96e1fb  # [aarch64]
 
 build:
   number: 0
