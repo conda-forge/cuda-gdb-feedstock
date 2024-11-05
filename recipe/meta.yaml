@@ -17,16 +17,22 @@ source:
   sha256: 914e6e44ec4174c4961275644e9fa675d3cb7a6962761772d48e414f95dce575  # [aarch64]
 
 build:
-  number: 0
+  number: 1
+  binary_relocation: false
   skip: true  # [osx or win or ppc64le]
 
 test:
+  requires:
+    - patchelf                                                # [linux]
+  files:
+    - test-rpath.sh                                           # [linux]
   commands:
     - test -f $PREFIX/bin/cuda-gdb
     - test -f $PREFIX/bin/cuda-gdbserver
     - test -f $PREFIX/extras/Debugger/Readme.txt
     - test -d $PREFIX/share/gdb/syscalls
     - test -d $PREFIX/share/gdb/system-gdbinit
+    - bash test-rpath.sh                                      # [linux]
 
 outputs:
   - name: cuda-gdb
