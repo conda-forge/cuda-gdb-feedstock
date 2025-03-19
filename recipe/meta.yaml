@@ -57,16 +57,17 @@ outputs:
         - test -f $PREFIX/extras/Debugger/Readme.txt
         - test -d $PREFIX/share/gdb/syscalls
         - test -d $PREFIX/share/gdb/system-gdbinit
-        - bash test-rpath.sh                                      # [linux]    about:
-          home: https://developer.nvidia.com/cuda-toolkit
-          license_file: LICENSE
-          license: LicenseRef-NVIDIA-End-User-License-Agreement
-          license_url: https://docs.nvidia.com/cuda/eula/index.html
-          summary: CUDA-GDB is the NVIDIA tool for debugging CUDA applications
-          description: |
-            CUDA-GDB is the NVIDIA tool for debugging CUDA applications running on Linux.
-            CUDA-GDB is an extension to the x86-64 port of GDB, the GNU Project debugger.
-          doc_url: https://docs.nvidia.com/cuda/cuda-gdb/index.html
+        - bash test-rpath.sh                                      # [linux]
+    about:
+      home: https://developer.nvidia.com/cuda-toolkit
+      license_file: LICENSE
+      license: LicenseRef-NVIDIA-End-User-License-Agreement
+      license_url: https://docs.nvidia.com/cuda/eula/index.html
+      summary: CUDA-GDB is the NVIDIA tool for debugging CUDA applications
+      description: |
+        CUDA-GDB is the NVIDIA tool for debugging CUDA applications running on Linux.
+        CUDA-GDB is an extension to the x86-64 port of GDB, the GNU Project debugger.
+      doc_url: https://docs.nvidia.com/cuda/cuda-gdb/index.html
 
   - name: cuda-gdb-src
     files:
