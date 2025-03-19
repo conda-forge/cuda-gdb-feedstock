@@ -17,7 +17,7 @@ source:
   sha256: b2f7ecf4ee1e01b9c165506797ad99ea446815bdd0fe0e7b4d79ed4c56938032  # [aarch64]
 
 build:
-  number: 0
+  number: 1
   binary_relocation: false
   skip: true  # [osx or win or ppc64le]
 
@@ -100,8 +100,8 @@ about:
   license_url: https://docs.nvidia.com/cuda/eula/index.html
   summary: CUDA-GDB is the NVIDIA tool for debugging CUDA applications
   description: |
-        CUDA-GDB is the NVIDIA tool for debugging CUDA applications running on Linux.
-        CUDA-GDB is an extension to the x86-64 port of GDB, the GNU Project debugger.
+    CUDA-GDB is the NVIDIA tool for debugging CUDA applications running on Linux.
+    CUDA-GDB is an extension to the x86-64 port of GDB, the GNU Project debugger.
   doc_url: https://docs.nvidia.com/cuda/cuda-gdb/index.html
 
 extra:
