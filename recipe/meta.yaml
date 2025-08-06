@@ -1,6 +1,6 @@
 {% set name = "cuda-gdb" %}
-{% set version = "12.9.79" %}
-{% set cuda_version = "12.9" %}
+{% set version = "13.0.39" %}
+{% set cuda_version = "13.0" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-ppc64le" %}  # [ppc64le]
 {% set platform = "linux-sbsa" %}  # [aarch64]
@@ -13,8 +13,8 @@ package:
 
 source:
   url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_gdb/{{ platform }}/cuda_gdb-{{ platform }}-{{ version }}-archive.{{ extension }}
-  sha256: 3dbb657683cd4f2989c30bdad31b3f4493795a9acc8a2214f48df3cfca7c37c0  # [linux64]
-  sha256: 251b9bd86ffcce0cdc4a5480ef3d8d609ca3a276cbbb5c793ca9978721d31faf  # [aarch64]
+  sha256: 46c315283317407c6c1e5874704600f1ea447596c7aeb6184b6dce41aac2be54  # [linux64]
+  sha256: 2c67eccb9dd5ef05e6597feef65df21155610f3d4fc999eaa1a4d99a88f4a994  # [aarch64]
 
 build:
   number: 0
@@ -55,7 +55,6 @@ outputs:
       commands:
         - test -f $PREFIX/bin/cuda-gdb
         - test -f $PREFIX/bin/cuda-gdbserver
-        - test -f $PREFIX/extras/Debugger/Readme.txt
         - test -d $PREFIX/share/gdb/syscalls
         - test -d $PREFIX/share/gdb/system-gdbinit
         - bash test-rpath.sh                                      # [linux]
