@@ -8,7 +8,7 @@ errors=""
 
 for bin in `find ${PREFIX}/bin -type f`; do
     [[ "${bin}" =~ "patchelf" ]] && continue
-    [[ "${bin}" =~ /bin/cuda-gdb$ && ${target_platform} == "linux-64" ]] && continue  # linux-64 cuda-gdb is a shell script
+    [[ "${bin}" =~ /bin/cuda-gdb$ ]] && continue  # cuda-gdb is a shell script
 
     filename=$(basename "${bin}")
     echo "Artifact to test: ${filename}"

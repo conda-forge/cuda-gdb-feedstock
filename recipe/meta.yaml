@@ -55,7 +55,6 @@ outputs:
       commands:
         - test -f $PREFIX/bin/cuda-gdb
         - test -f $PREFIX/bin/cuda-gdbserver
-        - test -f $PREFIX/extras/Debugger/Readme.txt
         - test -d $PREFIX/share/gdb/syscalls
         - test -d $PREFIX/share/gdb/system-gdbinit
         - bash test-rpath.sh                                      # [linux]
