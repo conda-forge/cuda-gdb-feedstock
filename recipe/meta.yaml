@@ -3,7 +3,10 @@
 {% set cuda_version = "12.9" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-ppc64le" %}  # [ppc64le]
-{% set platform = "linux-sbsa" %}  # [aarch64]
+{% set platform = "linux-sbsa" %}  # [aarch64 and arm_variant_type=="sbsa"]
+{% set platform = "linux-aarch64" %}  # [aarch64 and arm_variant_type=="tegra"]
+{% set target_name = "sbsa-linux" %}  # [aarch64 and arm_variant_type=="sbsa"]
+{% set target_name = "aarch64-linux" %}  # [aarch64 and arm_variant_type=="tegra"]
 {% set extension = "tar.xz" %}  # [not win]
 {% set extension = "zip" %}  # [win]
 
@@ -14,10 +17,11 @@ package:
 source:
   url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_gdb/{{ platform }}/cuda_gdb-{{ platform }}-{{ version }}-archive.{{ extension }}
   sha256: 3dbb657683cd4f2989c30bdad31b3f4493795a9acc8a2214f48df3cfca7c37c0  # [linux64]
-  sha256: 251b9bd86ffcce0cdc4a5480ef3d8d609ca3a276cbbb5c793ca9978721d31faf  # [aarch64]
+  sha256: 251b9bd86ffcce0cdc4a5480ef3d8d609ca3a276cbbb5c793ca9978721d31faf  # [aarch64 and arm_variant_type=="sbsa"]
+  sha256: 5473c27f1ec03fe064a09399e52b251e6ca5d3b9a67f21c1a26a02a26102f165  # [aarch64 and arm_variant_type=="tegra"]
 
 build:
-  number: 0
+  number: 1
   skip: true  # [osx or win or ppc64le]
 
 requirements:
@@ -45,7 +49,6 @@ outputs:
         - gmp
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
-      run_constrained:
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
     test:
       requires:
@@ -80,7 +83,6 @@ outputs:
         - cuda-version {{ cuda_version }}
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
-      run_constrained:
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
     test:
       commands:
