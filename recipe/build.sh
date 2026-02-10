@@ -1,28 +1,48 @@
 #!/bin/bash
 
-# Install to conda style directories
-[[ -d lib64 ]] && mv lib64 lib
+# Copy of https://github.com/conda-forge/gdb-feedstock/blob/main/recipe/build.sh
 
-[[ ${target_platform} == "linux-64" ]] && targetsDir="targets/x86_64-linux"
-[[ ${target_platform} == "linux-ppc64le" ]] && targetsDir="targets/ppc64le-linux"
-[[ ${target_platform} == "linux-aarch64" ]] && targetsDir="targets/sbsa-linux"
+# Get an updated config.sub and config.guess
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./readline/readline/support
+cp $BUILD_PREFIX/share/gnuconfig/config.* .
 
-for i in `ls`; do
-    [[ $i == "build_env_setup.sh" ]] && continue
-    [[ $i == "conda_build.sh" ]] && continue
-    [[ $i == "metadata_conda_debug.yaml" ]] && continue
+set -eux
 
-    if [[ $i == "bin" ]]; then
-        for j in `ls "${i}"`; do
-            [[ -f "bin/${j}" ]] || continue
-            [[ ${j} == "cuda-gdb" ]] && continue # cuda-gdb is a shell script
+export CPPFLAGS="$CPPFLAGS -I$PREFIX/include -I$SRC_DIR/binary/extras/Debugger/include/"
+export CXXFLAGS="${CXXFLAGS} -std=gnu++17"
 
-            echo patchelf --force-rpath --set-rpath "\$ORIGIN/../lib:\$ORIGIN/../${targetsDir}/lib" "${i}/${j}" ...
-            patchelf --force-rpath --set-rpath "\$ORIGIN/../lib:\$ORIGIN/../${targetsDir}/lib" "${i}/${j}"
-        done
-    fi
+# Setting /usr/lib/debug as debug dir makes it possible to debug the system's
+# python on most Linux distributions
 
-    cp -rv $i ${PREFIX}
-done
+mkdir build
+cd build
 
-check-glibc "$PREFIX"/lib*/*.so.* "$PREFIX"/bin/* "$PREFIX"/targets/*/lib*/*.so.* "$PREFIX"/targets/*/bin/*
+# --with-gdb-datadir is given to not conflict with gdb conda package
+$SRC_DIR/configure \
+    --prefix="$PREFIX" \
+    --with-separate-debug-dir="$PREFIX/lib/debug:/usr/lib/debug" \
+    --with-python=${PYTHON} \
+    --with-system-gdbinit="$PREFIX/etc/gdbinit" \
+    --with-system-zlib \
+    --with-zstd=yes \
+    --with-libiconv-prefix=$PREFIX \
+    --program-prefix="cuda-" \
+    --with-gdb-datadir="$PREFIX/share/cuda-gdb" \
+    --enable-cuda \
+    || (cat config.log && exit 1)
+
+make -j${CPU_COUNT} VERBOSE=1
+make install install-gdbserver
+
+# remove bfd includes and static libraries as they are statically linked in
+cd $PREFIX
+rm -rf include
+rm -rf lib/lib*.a
+rm -rf $CONDA_TOOLCHAIN_HOST/bin
+rm -rf $CONDA_TOOLCHAIN_HOST/lib
+rm -rf share/locale
+rm -rf share/info
+rm -rf etc/gprofng.rc
+rm -rf lib/bfd-plugins
+rm -rf lib/gprofng
+rm -rf lib/libinproctrace*
