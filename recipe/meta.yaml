@@ -10,13 +10,8 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://github.com/NVIDIA/cuda-gdb/archive/cuda-toolkit-{{ cuda_version }}-release.tar.gz
-    sha256: 29d62f09e5b135497c7f139abf0db136f05697e86e3785f33b1c3c0f26456ea1
-
-  - url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_gdb/{{ platform }}/cuda_gdb-{{ platform }}-{{ version }}-archive.tar.xz
-    sha256: bc514f7fae45a91c3d1750bd1e353d237fa4f140a1ebc209c9e3da6d68197248  # [linux64]
-    sha256: d00656f12034fc5ed7ceb93d61a6ed6a01fa7118ae65d0a28495f529f9674aaa  # [aarch64]
-    folder: binary
+  url: https://developer.download.nvidia.com/compute/cuda/opensource/13.1.1/cuda_gdb_src-all-all-{{ version }}.tar.gz
+  sha256: fd8d93f7f3bccdae58255392afaff382448809deed9f8797ecae11d43a16ff3a
 
 build:
   number: 1

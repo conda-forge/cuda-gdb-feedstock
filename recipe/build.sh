@@ -8,7 +8,7 @@ cp $BUILD_PREFIX/share/gnuconfig/config.* .
 
 set -eux
 
-export CPPFLAGS="$CPPFLAGS -I$PREFIX/include -I$SRC_DIR/binary/extras/Debugger/include/"
+export CPPFLAGS="$CPPFLAGS -I$PREFIX/include -I${SRC_DIR}/include"
 export CXXFLAGS="${CXXFLAGS} -std=gnu++17"
 
 # Setting /usr/lib/debug as debug dir makes it possible to debug the system's
