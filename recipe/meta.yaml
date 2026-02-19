@@ -54,6 +54,8 @@ outputs:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
         - ncurses
         - python
+        # https://docs.nvidia.com/cuda/cuda-gdb/index.html#release-notes
+        # Check release notes for supported GDB
         - gdb >=14.2,<15.0
     test:
       requires:
