@@ -75,8 +75,9 @@ outputs:
         - cuda-gdbserver --version
     about:
       home: https://developer.nvidia.com/cuda-toolkit
+      dev_url: https://github.com/NVIDIA/cuda-gdb
       license_file: LICENSE
-      license: LicenseRef-NVIDIA-End-User-License-Agreement
+      license: GPL-3.0-only
       license_url: https://docs.nvidia.com/cuda/eula/index.html
       summary: CUDA-GDB is the NVIDIA tool for debugging CUDA applications
       description: |
@@ -99,8 +100,9 @@ outputs:
         - test -f $PREFIX/extras/cuda-gdb-{{ version }}.src.tar.gz
     about:
       home: https://developer.nvidia.com/cuda-toolkit
+      dev_url: https://github.com/NVIDIA/cuda-gdb
       license_file: LICENSE
-      license: LicenseRef-NVIDIA-End-User-License-Agreement
+      license: GPL-3.0-only
       license_url: https://docs.nvidia.com/cuda/eula/index.html
       summary: CUDA-GDB is the NVIDIA tool for debugging CUDA applications
       description: |
@@ -110,8 +112,9 @@ outputs:
 
 about:
   home: https://developer.nvidia.com/cuda-toolkit
+  dev_url: https://github.com/NVIDIA/cuda-gdb
   license_file: LICENSE
-  license: LicenseRef-NVIDIA-End-User-License-Agreement
+  license: GPL-3.0-only
   license_url: https://docs.nvidia.com/cuda/eula/index.html
   summary: CUDA-GDB is the NVIDIA tool for debugging CUDA applications
   description: |
