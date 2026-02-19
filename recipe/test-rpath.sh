@@ -6,7 +6,7 @@
 
 errors=""
 
-for bin in `find ${PREFIX}/bin -type f`; do
+for bin in `find ${PREFIX}/bin/cuda-gdb* -type f`; do
     [[ "${bin}" =~ "patchelf" ]] && continue
     [[ "${bin}" =~ /bin/cuda-gdb$ ]] && continue  # cuda-gdb is a shell script
 
