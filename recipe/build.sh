@@ -7,6 +7,9 @@
 [[ ${target_platform} == "linux-ppc64le" ]] && targetsDir="targets/ppc64le-linux"
 [[ ${target_platform} == "linux-aarch64" ]] && targetsDir="targets/sbsa-linux"
 
+mkdir -p "${PREFIX}/${targetsDir}"
+mv -v extras/Debugger/include "${PREFIX}/${targetsDir}"
+
 for i in `ls`; do
     [[ $i == "build_env_setup.sh" ]] && continue
     [[ $i == "conda_build.sh" ]] && continue
