@@ -72,7 +72,7 @@ outputs:
         - test -f $PREFIX/bin/cuda-gdb-minimal
         - test -f $PREFIX/bin/cuda-gdb-python{{ PY_VER }}-tui
         - test -f $PREFIX/bin/cuda-gdbserver
-        - test -d $PREFIX/targets/{{ target_name }}/include/cudadebugger.h
+        - test -f $PREFIX/targets/{{ target_name }}/include/cudadebugger.h
         - test ! -d $PREFIX/extras/Debugger
         - test -d $PREFIX/share/gdb/syscalls
         - test -d $PREFIX/share/gdb/system-gdbinit
