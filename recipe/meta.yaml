@@ -37,8 +37,9 @@ outputs:
       binary_relocation: false
     files:
       - bin/cuda-gdb
-      - bin/cuda-gdb-minimal
-      - bin/cuda-gdb-python{{ PY_VER }}-tui
+      # We remove the wrapper script and rename one of the below to cuda-gdb
+      # - bin/cuda-gdb-minimal
+      # - bin/cuda-gdb-python{{ PY_VER }}-tui
       - bin/cuda-gdbserver
       - targets/{{ target_name }}/include
       # - extras/Debugger  # moved to targets/{{ target_name }}
@@ -69,8 +70,9 @@ outputs:
         - test-rpath.sh                                           # [linux]
       commands:
         - test -f $PREFIX/bin/cuda-gdb
-        - test -f $PREFIX/bin/cuda-gdb-minimal
-        - test -f $PREFIX/bin/cuda-gdb-python{{ PY_VER }}-tui
+        # We remove the wrapper script and rename one of the below to cuda-gdb
+        # - test -f $PREFIX/bin/cuda-gdb-minimal
+        # - test -f $PREFIX/bin/cuda-gdb-python{{ PY_VER }}-tui
         - test -f $PREFIX/bin/cuda-gdbserver
         - test -f $PREFIX/targets/{{ target_name }}/include/cudadebugger.h
         - test ! -d $PREFIX/extras/Debugger
@@ -78,7 +80,7 @@ outputs:
         - test -d $PREFIX/share/gdb/system-gdbinit
         - bash test-rpath.sh                                      # [linux]
         - cuda-gdb --version
-        - cuda-gdb-minimal --version
+        # - cuda-gdb-minimal --version
         - cuda-gdbserver --version
     about:
       home: https://developer.nvidia.com/cuda-toolkit
