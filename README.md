@@ -5,9 +5,11 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cuda-gdb-feedst
 
 Home: https://developer.nvidia.com/cuda-toolkit
 
-Package license: [LicenseRef-NVIDIA-End-User-License-Agreement](https://docs.nvidia.com/cuda/eula/index.html)
+Package license: [GPL-3.0-only](https://docs.nvidia.com/cuda/eula/index.html)
 
 Summary: CUDA-GDB is the NVIDIA tool for debugging CUDA applications
+
+Development: https://github.com/NVIDIA/cuda-gdb
 
 Documentation: https://docs.nvidia.com/cuda/cuda-gdb/index.html
 
