@@ -52,7 +52,6 @@ outputs:
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
       host:
         - cuda-version {{ cuda_version }}
-        - expat                                 # [aarch64]
         - gmp
         - ncurses
         - python
