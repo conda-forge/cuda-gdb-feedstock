@@ -17,6 +17,9 @@ if [[ ${target_platform} == "linux-64" ]]; then
     if [[ ${PY_VER:-0} == "0" ]]; then
         mv -v "bin/cuda-gdb-minimal" bin/cuda-gdb
     else
+        # Due to an issue similar to https://github.com/astral-sh/python-build-standalone/issues/197,
+        # we need to strip an unneeded link to libcrypt.so.1
+        patchelf --remove-needed libcrypt.so.1 "bin/cuda-gdb-python${PY_VER}-tui"
         mv -v "bin/cuda-gdb-python${PY_VER}-tui" bin/cuda-gdb
     fi
 fi
