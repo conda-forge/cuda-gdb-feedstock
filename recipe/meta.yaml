@@ -29,7 +29,7 @@ requirements:
   build:
     - cf-nvidia-tools 1.*  # [linux]
   host:
-    - python
+    - python  # [linux64]
 
 outputs:
   - name: cuda-gdb
@@ -53,12 +53,12 @@ outputs:
       host:
         - cuda-version {{ cuda_version }}
         - gmp
-        - ncurses
-        - python
+        - ncurses  # [linux64]
+        - python  # [linux64]
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
-        - ncurses
-        - python
+        - ncurses  # [linux64]
+        - python  # [linux64]
         # https://docs.nvidia.com/cuda/cuda-gdb/index.html#release-notes
         # Check release notes for supported GDB
         - gdb >=14.2,<15.0
