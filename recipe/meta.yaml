@@ -21,7 +21,7 @@ source:
   sha256: 5473c27f1ec03fe064a09399e52b251e6ca5d3b9a67f21c1a26a02a26102f165  # [aarch64 and arm_variant_type=="tegra"]
 
 build:
-  number: 1
+  number: 2
   skip: true  # [osx or win or ppc64le]
   skip: true  # [py<38 or py>312]
 
