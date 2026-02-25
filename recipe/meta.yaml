@@ -21,7 +21,7 @@ source:
   sha256: d00656f12034fc5ed7ceb93d61a6ed6a01fa7118ae65d0a28495f529f9674aaa  # [aarch64]
 
 build:
-  number: 1
+  number: 2
   skip: true  # [osx or win or ppc64le]
   skip: true  # [py<38 or py>312]
 
@@ -52,7 +52,6 @@ outputs:
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
       host:
         - cuda-version {{ cuda_version }}
-        - expat                                 # [aarch64]
         - gmp
         - ncurses
         - python
