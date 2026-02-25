@@ -7,7 +7,7 @@
 
 errors=""
 
-for bin in `find ${PREFIX}/bin -type f`; do
+for bin in `find ${PREFIX}/bin/cuda-gdb* -type f`; do
     [[ "${bin}" =~ "patchelf" ]] && continue
     [[ "${bin}" =~ /bin/cuda-gdb$ && ${target_platform} == "linux-64" ]] && continue  # linux-64 cuda-gdb is a shell script
 
