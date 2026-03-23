@@ -21,7 +21,7 @@ source:
   sha256: 40f18e4242f233145a914b11bc0b954a838e88de5add19cf2f414d2891a795e2  # [aarch64]
 
 build:
-  number: 0
+  number: 1
   skip: true  # [osx or win or ppc64le]
   skip: true  # [py<38 or py>312]
 
@@ -61,7 +61,7 @@ outputs:
         - python
         # https://docs.nvidia.com/cuda/cuda-gdb/index.html#release-notes
         # Check release notes for supported GDB
-        - gdb >=14.2,<15.0
+        - gdb >=16.3,<17.0
     test:
       requires:
         - patchelf                                                # [linux]
