@@ -21,9 +21,11 @@ source:
   sha256: 48bfce61e6f86661ec12bb65dd97e1607799406de5ceafccba2212962568d40e  # [aarch64]
 
 build:
-  number: 1
+  number: 2
   skip: true  # [osx or win or ppc64le]
+  # For the highest supported python, we also build the no-python variant
   skip: true  # [py<38 or py>312]
+  skip: true  # [skip_python and (py!=312)]
 
 requirements:
   build:
@@ -54,11 +56,11 @@ outputs:
         - cuda-version {{ cuda_version }}
         - gmp
         - ncurses
-        - python
+        - python  # [not skip_python]
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
         - ncurses
-        - python
+        - python  # [not skip_python]
         # https://docs.nvidia.com/cuda/cuda-gdb/index.html#release-notes
         # Check release notes for supported GDB
         - gdb >=14.2,<15.0
