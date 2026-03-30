@@ -14,7 +14,7 @@ mv -v extras/Debugger/include "${PREFIX}/${targetsDir}"
 # No python support for the debugger in non-x86 platforms on CUDA 12.9
 if [[ ${target_platform} == "linux-64" ]]; then
     rm bin/cuda-gdb
-    if [[ ${PY_VER:-0} == "0" ]]; then
+    if [[ ${PY_VER:-0} == "0" || ${skip_python} == "true" ]]; then
         mv -v "bin/cuda-gdb-minimal" bin/cuda-gdb
     else
         # Due to an issue similar to https://github.com/astral-sh/python-build-standalone/issues/197,
