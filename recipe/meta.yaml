@@ -1,6 +1,6 @@
 {% set name = "cuda-gdb" %}
-{% set version = "13.1.115" %}
-{% set cuda_version = "13.1" %}
+{% set version = "13.2.75" %}
+{% set cuda_version = ".".join(version.split(".")[:2]) %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-ppc64le" %}  # [ppc64le]
 {% set platform = "linux-sbsa" %}  # [aarch64]
@@ -11,7 +11,7 @@ package:
 
 source:
   url: https://developer.download.nvidia.com/compute/cuda/opensource/13.1.1/cuda_gdb_src-all-all-{{ version }}.tar.gz
-  sha256: fd8d93f7f3bccdae58255392afaff382448809deed9f8797ecae11d43a16ff3a
+  sha256: acf55b75251f9b32d8d30aaafe5ea329525d38a8c6480acc25606806e957c881
 
 build:
   number: 1
@@ -23,44 +23,49 @@ requirements:
     - {{ compiler("c") }}
     - {{ compiler("cxx") }}
     - {{ stdlib("c") }}
-    - cuda-nvcc_{{ target_platform }} {{ cuda_version }}.*
-    - python                                 # [build_platform != target_platform]
+    - arm-variant * {{ arm_variant_type }}  # [aarch64]
+    - bison
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - cuda-nvcc_{{ target_platform }} {{ cuda_version }}.*
     - gnuconfig  # [unix]
     - make >=3.82
     - pkg-config
-    - bison
+    - python                                 # [build_platform != target_platform]
   host:
-    - python
-    - ncurses
-    - texinfo
-    - liblzma-devel
-    - zlib
-    - readline
-    - libiconv
-    - gmp
-    - mpfr
-    - zstd
     - cuda-version {{ cuda_version }}
-  run:
-    - python
-    - ncurses
+    - gmp
+    - libiconv
     - liblzma-devel
+    - mpfr
+    - ncurses
+    - python
+    - readline
+    - texinfo
     - zlib
     - zstd
-    - six
-    - libiconv
-    - pygments
+  run:
     - {{ pin_compatible("cuda-version", max_pin="x.x") }}
-    # for gdbinit files
-    - gdb
+    - libiconv
+    - liblzma-devel
+    - ncurses
+    - pygments
+    - python
+    - six
+    - zlib
+    - zstd
+  run_constrained:
+      # cuda-gdb is a fork of gdb
+    - gdb <0.0a0
 
 test:
   commands:
     - test -f $PREFIX/bin/cuda-gdb
     - test -f $PREFIX/bin/cuda-gdbserver
-    - test -d $PREFIX/share/cuda-gdb/syscalls
-    - test -d $PREFIX/share/cuda-gdb/system-gdbinit
+    - test ! -d $PREFIX/extras/Debugger
+    - test -d $PREFIX/share/gdb/syscalls
+    - test -d $PREFIX/share/gdb/system-gdbinit
+    - cuda-gdb --version
+    - cuda-gdbserver --version
 
 about:
   home: https://developer.nvidia.com/cuda-toolkit
