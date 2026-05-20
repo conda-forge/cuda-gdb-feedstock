@@ -18,31 +18,44 @@ mkdir build
 cd build
 
 # --with-gdb-datadir is given to not conflict with gdb conda package
+#
+# --enable-targets=m68k-linux-gnu is required: cuda-gdb re-uses bfd_arch_m68k as the CUDA
+# architecture (see gdb/arch-utils.c around the NVIDIA_CUDA_GDB block), so libbfd must
+# include m68k cpu support or cuda-gdb aborts at startup with "Attempt to register unknown
+# architecture (2)". As of June 2026, only x86 and ARM platforms are supported host
+# platforms for CUDA, so we don't need to build for others.
 $SRC_DIR/configure \
+    --build="$BUILD" --host="$HOST" --target="$HOST" \
+    --disable-binutils \
+    --disable-gas \
+    --disable-gold \
+    --disable-gprof \
+    --disable-gprofng \
+    --disable-ld \
+    --disable-nls \
+    --disable-sim \
+    --disable-source-highlight \
+    --disable-werror \
+    --enable-cuda \
+    --enable-targets="x86_64-linux-gnu,aarch64-linux-gnu,m68k-linux-gnu" \
+    --enable-tui \
     --prefix="$PREFIX" \
+    --program-prefix="cuda-" \
+    --with-curses \
+    --with-expat=yes \
+    --with-gdb-datadir="$PREFIX/share/cuda-gdb" \
+    --with-gmp="$PREFIX" \
+    --with-libiconv-prefix="$PREFIX" \
+    --with-lzma --with-liblzma-prefix="$PREFIX" \
+    --with-mpfr="$PREFIX" \
+    --with-pkgversion="conda-forge cuda-gdb" \
+    --with-python="$PYTHON" \
     --with-separate-debug-dir="$PREFIX/lib/debug:/usr/lib/debug" \
-    --with-python=${PYTHON} \
-    --with-system-gdbinit="$PREFIX/etc/gdbinit" \
+    --with-system-readline \
     --with-system-zlib \
     --with-zstd=yes \
-    --with-libiconv-prefix=$PREFIX \
-    --program-prefix="cuda-" \
-    --with-gdb-datadir="$PREFIX/share/cuda-gdb" \
-    --enable-cuda \
+    --without-guile \
     || (cat config.log && exit 1)
 
 make -j${CPU_COUNT} VERBOSE=1
 make install install-gdbserver
-
-# remove bfd includes and static libraries as they are statically linked in
-cd $PREFIX
-rm -rf include
-rm -rf lib/lib*.a
-rm -rf $CONDA_TOOLCHAIN_HOST/bin
-rm -rf $CONDA_TOOLCHAIN_HOST/lib
-rm -rf share/locale
-rm -rf share/info
-rm -rf etc/gprofng.rc
-rm -rf lib/bfd-plugins
-rm -rf lib/gprofng
-rm -rf lib/libinproctrace*

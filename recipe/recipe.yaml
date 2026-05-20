@@ -21,6 +21,10 @@ build:
     - win
     - ppc64le
     - match(python, ">=3.13")
+  files:
+    - bin/cuda-gdb
+    - bin/cuda-gdbserver
+    - share/cuda-gdb/**
 
 requirements:
   build:
@@ -41,6 +45,7 @@ requirements:
     - pkg-config
   host:
     - cuda-version ${{ cuda_compiler_version }}
+    - expat
     - gmp
     - libiconv
     - liblzma-devel
@@ -53,27 +58,29 @@ requirements:
     - zstd
   run:
     - ${{ pin_compatible('cuda-version', upper_bound='x.x') }}
-    - libiconv
-    - liblzma-devel
-    - ncurses
     - pygments
     - python
     - six
-    - zlib
-    - zstd
   run_constraints:
     # cuda-gdb is a fork of gdb
     - gdb <0.0a0
 
 tests:
+  - package_contents:
+      strict: true
+      files:
+        exists:
+          - bin/cuda-gdb
+          - bin/cuda-gdbserver
+          - share/cuda-gdb/python/gdb/*
+          - share/cuda-gdb/syscalls/*
+          - share/cuda-gdb/system-gdbinit/*
+        not_exists:
+          - extras/Debugger
   - script:
-      - test -f $PREFIX/bin/cuda-gdb
-      - test -f $PREFIX/bin/cuda-gdbserver
-      - test ! -d $PREFIX/extras/Debugger
-      - test -d $PREFIX/share/gdb/syscalls
-      - test -d $PREFIX/share/gdb/system-gdbinit
       - cuda-gdb --version
       - cuda-gdbserver --version
+      - cuda-gdb -q -ex 'tui enable'
 
 about:
   homepage: https://developer.nvidia.com/cuda-toolkit
