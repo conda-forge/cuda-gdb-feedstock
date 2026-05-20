@@ -1,3 +1,5 @@
+arm_variant_type:
+- sbsa
 c_compiler:
 - gcc
 c_compiler_version:
@@ -10,6 +12,8 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
+cuda_compiler:
+- cuda-nvcc
 cxx_compiler:
 - gxx
 cxx_compiler_version:
@@ -39,6 +43,7 @@ target_platform:
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
+  - c_stdlib_version
 zlib:
 - '1'
 zstd:

@@ -1,0 +1,92 @@
+schema_version: 1
+
+context:
+  version: "13.2.75"
+  cuda_version: "13.2.1"
+  cuda_compiler_version: ${{ (version | split('.'))[:2] | join('.') }}.*
+
+package:
+  name: cuda-gdb
+  version: ${{ version }}
+
+source:
+  url: https://developer.download.nvidia.com/compute/cuda/opensource/${{ cuda_version }}/cuda_gdb_src-all-all-${{ version }}.tar.gz
+  sha256: acf55b75251f9b32d8d30aaafe5ea329525d38a8c6480acc25606806e957c881
+
+build:
+  number: 1
+  # gdb version bundled (14.1) does not support py>=3.13
+  skip:
+    - osx
+    - win
+    - ppc64le
+    - match(python, ">=3.13")
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cuda') }}
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib('c') }}
+    - if: aarch64
+      then: arm-variant * ${{ arm_variant_type }}
+    - bison
+    - if: build_platform != target_platform
+      then:
+        - cross-python_${{ target_platform }}
+        - python
+    - if: unix
+      then: gnuconfig
+    - make >=3.82
+    - pkg-config
+  host:
+    - cuda-version ${{ cuda_compiler_version }}
+    - gmp
+    - libiconv
+    - liblzma-devel
+    - mpfr
+    - ncurses
+    - python
+    - readline
+    - texinfo
+    - zlib
+    - zstd
+  run:
+    - ${{ pin_compatible('cuda-version', upper_bound='x.x') }}
+    - libiconv
+    - liblzma-devel
+    - ncurses
+    - pygments
+    - python
+    - six
+    - zlib
+    - zstd
+  run_constraints:
+    # cuda-gdb is a fork of gdb
+    - gdb <0.0a0
+
+tests:
+  - script:
+      - test -f $PREFIX/bin/cuda-gdb
+      - test -f $PREFIX/bin/cuda-gdbserver
+      - test ! -d $PREFIX/extras/Debugger
+      - test -d $PREFIX/share/gdb/syscalls
+      - test -d $PREFIX/share/gdb/system-gdbinit
+      - cuda-gdb --version
+      - cuda-gdbserver --version
+
+about:
+  homepage: https://developer.nvidia.com/cuda-toolkit
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: CUDA-GDB is the NVIDIA tool for debugging CUDA applications
+  description: |
+    CUDA-GDB is the NVIDIA tool for debugging CUDA applications running on Linux.
+    CUDA-GDB is an extension to the x86-64 port of GDB, the GNU Project debugger.
+  documentation: https://docs.nvidia.com/cuda/cuda-gdb/index.html
+
+extra:
+  recipe-maintainers:
+    - conda-forge/cuda
+    - isuruf
+  feedstock-name: cuda-gdb
