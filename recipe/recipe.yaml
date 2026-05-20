@@ -22,8 +22,14 @@ build:
     - ppc64le
     - match(python, ">=3.13")
   files:
+    - bin/cuda-gcore
     - bin/cuda-gdb
+    - bin/cuda-gdb-add-index
     - bin/cuda-gdbserver
+    - bin/cuda-gstack
+    - etc/gdbinit
+    - lib/libinproctrace.so
+    - lib/python*/site-packages/gdb_libpython.py
     - share/cuda-gdb/**
 
 requirements:
@@ -70,13 +76,21 @@ tests:
       strict: true
       files:
         exists:
+          - bin/cuda-gcore
           - bin/cuda-gdb
+          - bin/cuda-gdb-add-index
           - bin/cuda-gdbserver
+          - bin/cuda-gstack
+          - etc/gdbinit
+          - lib/libinproctrace.so
           - share/cuda-gdb/python/gdb/*
           - share/cuda-gdb/syscalls/*
           - share/cuda-gdb/system-gdbinit/*
         not_exists:
           - extras/Debugger
+      site_packages:
+        - __pycache__/gdb_libpython.*.pyc
+        - gdb_libpython
   - script:
       - cuda-gdb --version
       - cuda-gdbserver --version
