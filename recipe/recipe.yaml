@@ -51,6 +51,7 @@ requirements:
     - ${{ compiler('cuda') }}
     - ${{ compiler('cxx') }}
     - ${{ stdlib('c') }}
+    - cuda-version ${{ cuda_compiler_version }}
     - if: aarch64
       then: arm-variant * ${{ arm_variant_type }}
     - bison
