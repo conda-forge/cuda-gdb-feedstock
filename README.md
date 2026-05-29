@@ -5,23 +5,27 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cuda-gdb-feedst
 
 Home: https://developer.nvidia.com/cuda-toolkit
 
-Package license: [GPL-3.0-only](https://docs.nvidia.com/cuda/eula/index.html)
+Package license: GPL-2.0-or-later
 
 Summary: CUDA-GDB is the NVIDIA tool for debugging CUDA applications
-
-Development: https://github.com/NVIDIA/cuda-gdb
 
 Documentation: https://docs.nvidia.com/cuda/cuda-gdb/index.html
 
 CUDA-GDB is the NVIDIA tool for debugging CUDA applications running on Linux.
 CUDA-GDB is an extension to the x86-64 port of GDB, the GNU Project debugger.
 
-
 Current build status
 ====================
 
 
-<table>
+<table><tr>
+    <td>GitHub Actions</td>
+    <td>
+      <a href="https://github.com/conda-forge/cuda-gdb-feedstock/actions/workflows/conda-build.yml">
+        <img src="https://github.com/conda-forge/cuda-gdb-feedstock/actions/workflows/conda-build.yml/badge.svg?event=push&branch=main">
+      </a>
+    </td>
+  </tr>
 </table>
 
 Current release info
@@ -30,7 +34,6 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-cuda--gdb-green.svg)](https://anaconda.org/conda-forge/cuda-gdb) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cuda-gdb.svg)](https://anaconda.org/conda-forge/cuda-gdb) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cuda-gdb.svg)](https://anaconda.org/conda-forge/cuda-gdb) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cuda-gdb.svg)](https://anaconda.org/conda-forge/cuda-gdb) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-cuda--gdb--src-green.svg)](https://anaconda.org/conda-forge/cuda-gdb-src) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cuda-gdb-src.svg)](https://anaconda.org/conda-forge/cuda-gdb-src) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cuda-gdb-src.svg)](https://anaconda.org/conda-forge/cuda-gdb-src) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cuda-gdb-src.svg)](https://anaconda.org/conda-forge/cuda-gdb-src) |
 
 Installing cuda-gdb
 ===================
@@ -42,16 +45,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `cuda-gdb, cuda-gdb-src` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `cuda-gdb` can be installed with `conda`:
 
 ```
-conda install cuda-gdb cuda-gdb-src
+conda install cuda-gdb
 ```
 
 or with `mamba`:
 
 ```
-mamba install cuda-gdb cuda-gdb-src
+mamba install cuda-gdb
 ```
 
 It is possible to list all of the versions of `cuda-gdb` available on your platform with `conda`:
@@ -147,4 +150,5 @@ Feedstock Maintainers
 =====================
 
 * [@conda-forge/cuda](https://github.com/orgs/conda-forge/teams/cuda/)
+* [@isuruf](https://github.com/isuruf/)
 
