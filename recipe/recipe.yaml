@@ -34,12 +34,13 @@ build:
     - osx
     - win
     - ppc64le
+    - match(python, ">=3.13")
   files:
     - bin/cuda-gcore
     - bin/cuda-gdb
     - bin/cuda-gdb-add-index
     - bin/cuda-gdbserver
-    - bin/cuda-gstack
+    # - bin/cuda-gstack
     - etc/gdbinit
     - lib/libinproctrace.so
     - lib/python*/site-packages/gdb_libpython.py
@@ -96,7 +97,7 @@ tests:
           - bin/cuda-gdb
           - bin/cuda-gdb-add-index
           - bin/cuda-gdbserver
-          - bin/cuda-gstack
+          # - bin/cuda-gstack  # Doesn't yet exist in gdb 14.2
           - etc/gdbinit
           - lib/libinproctrace.so
           - share/cuda-gdb/python/gdb/*
