@@ -77,6 +77,8 @@ requirements:
     - zstd
   run:
     - ${{ pin_compatible('cuda-version', upper_bound='x.x') }}
+    - cuda-cuobjdump
+    - cuda-nvdisasm
     - pygments
     - python
     - six
