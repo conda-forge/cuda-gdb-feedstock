@@ -1,0 +1,128 @@
+schema_version: 1
+
+context:
+  version: "12.9.79"
+  cuda_version: "12.9.2"
+  cuda_compiler_version: ${{ (version | split('.'))[:2] | join('.') }}.*
+
+package:
+  name: cuda-gdb
+  version: ${{ version }}
+
+source:
+  url: https://developer.download.nvidia.com/compute/cuda/opensource/${{ cuda_version }}/cuda_gdb_src-all-all-${{ version }}.tar.gz
+  sha256: 21195be37ef4932fb650c43f9bd6271a773d0c8bc6bd3cddf358512ed8df1f06
+
+build:
+  number: 3
+  # Upstream GDB | CUDA GDB | Supported Python
+  # -------------|----------|------------------
+  #         12.1 |   12.0   |       <=3.9
+  #         12.1 |   12.1   |       <=3.9
+  #         12.1 |   12.2   |       <=3.9
+  #         12.1 |   12.3   |       <=3.9
+  #         13.1 |   12.4   |       <=3.9
+  #         13.2 |   12.5   |       <=3.12
+  #         13.2 |   12.6   |       <=3.12
+  #         13.2 |   12.7   |       <=3.12
+  #         13.2 |   12.8   |       <=3.12
+  #         14.2 |   12.9   |       <=3.12
+  #         14.2 |   13.0   |       <=3.12
+  #         14.2 |   13.1   |       <=3.12
+  #         16.3 |   13.2   |       <=3.12
+  skip:
+    - osx
+    - win
+    - ppc64le
+  files:
+    - bin/cuda-gcore
+    - bin/cuda-gdb
+    - bin/cuda-gdb-add-index
+    - bin/cuda-gdbserver
+    - bin/cuda-gstack
+    - etc/gdbinit
+    - lib/libinproctrace.so
+    - lib/python*/site-packages/gdb_libpython.py
+    - share/cuda-gdb/**
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cuda') }}
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib('c') }}
+    - if: aarch64
+      then: arm-variant * ${{ arm_variant_type }}
+    - bison
+    - if: build_platform != target_platform
+      then:
+        - cross-python_${{ target_platform }}
+        - python
+    - if: unix
+      then: gnuconfig
+    - make >=3.82
+    - pkg-config
+  host:
+    - cuda-version ${{ cuda_compiler_version }}
+    - expat
+    - gmp
+    - libiconv
+    - liblzma-devel
+    - mpfr
+    - ncurses
+    - python
+    - readline
+    - texinfo
+    - zlib
+    - zstd
+  run:
+    - ${{ pin_compatible('cuda-version', upper_bound='x.x') }}
+    - cuda-cuobjdump
+    - cuda-nvdisasm
+    - pygments
+    - python
+    - six
+  run_constraints:
+    # cuda-gdb is a fork of gdb
+    - gdb <0.0a0
+
+tests:
+  - package_contents:
+      strict: true
+      files:
+        exists:
+          - bin/cuda-gcore
+          - bin/cuda-gdb
+          - bin/cuda-gdb-add-index
+          - bin/cuda-gdbserver
+          - bin/cuda-gstack
+          - etc/gdbinit
+          - lib/libinproctrace.so
+          - share/cuda-gdb/python/gdb/*
+          - share/cuda-gdb/syscalls/*
+          - share/cuda-gdb/system-gdbinit/*
+        not_exists:
+          - extras/Debugger
+      site_packages:
+        - __pycache__/gdb_libpython.*.pyc
+        - gdb_libpython
+  - script:
+      - cuda-gdb --version
+      - cuda-gdbserver --version
+      - cuda-gdb -q -ex 'tui enable'
+
+about:
+  homepage: https://developer.nvidia.com/cuda-toolkit
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: CUDA-GDB is the NVIDIA tool for debugging CUDA applications
+  description: |
+    CUDA-GDB is the NVIDIA tool for debugging CUDA applications running on Linux.
+    CUDA-GDB is an extension to the x86-64 port of GDB, the GNU Project debugger.
+  documentation: https://docs.nvidia.com/cuda/cuda-gdb/index.html
+
+extra:
+  recipe-maintainers:
+    - conda-forge/cuda
+    - isuruf
+  feedstock-name: cuda-gdb
