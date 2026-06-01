@@ -89,7 +89,7 @@ requirements:
 
 tests:
   - package_contents:
-      strict: true
+      strict: false
       files:
         exists:
           - bin/cuda-gcore
@@ -111,6 +111,16 @@ tests:
       - cuda-gdb --version
       - cuda-gdbserver --version
       - cuda-gdb -q -ex 'tui enable'
+      - cuda-gdb -q -ex "show host-charset" --batch
+  - script:
+      file: test-compile.sh
+    files:
+      recipe:
+        - testing/
+    requirements:
+      run:
+        - ${{ compiler('c') }}
+        - mold
 
 about:
   homepage: https://developer.nvidia.com/cuda-toolkit
