@@ -122,7 +122,6 @@ tests:
         requirements:
           run:
             - ${{ compiler('c') }}
-            - mold
 
 about:
   homepage: https://developer.nvidia.com/cuda-toolkit
