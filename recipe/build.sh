@@ -24,6 +24,11 @@ if [[ ${target_platform} == "linux-64" ]]; then
     fi
 fi
 
+# Fixes an issue caused by build differences between conda-forge and distro ncurses builds.
+# conda-forge has separate libraries for libtinfo and libtinfow. Loading both simultaneously
+# causes a segmentation fault due to duplicated global state.
+patchelf --replace-needed libtinfo.so.6 libtinfow.so.6 bin/cuda-gdb
+
 for i in `ls`; do
     [[ $i == "build_env_setup.sh" ]] && continue
     [[ $i == "conda_build.sh" ]] && continue
