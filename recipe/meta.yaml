@@ -96,6 +96,8 @@ outputs:
       doc_url: https://docs.nvidia.com/cuda/cuda-gdb/index.html
 
   - name: cuda-gdb-src
+    build:
+      skip: true
     files:
       - extras/cuda-gdb-{{ version }}.src.tar.gz
     requirements:
