@@ -21,7 +21,7 @@ source:
   sha256: 5ca08ce62a5dc1a2c6810e5ab4caeb52eac91a58cc7077e33ed0ce1cfee486fe  # [aarch64]
 
 build:
-  number: 0
+  number: 1
   skip: true  # [osx or win or ppc64le]
   # For the highest supported python, we also build the no-python variant
   skip: true  # [py<38 or py>312]
