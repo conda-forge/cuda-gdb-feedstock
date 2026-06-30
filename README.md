@@ -21,65 +21,12 @@ Current build status
 ====================
 
 
-<table>
-    
-  <tr>
-    <td>Azure</td>
+<table><tr>
+    <td>GitHub Actions</td>
     <td>
-      <details>
-        <summary>
-          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=19544&branchName=main">
-            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-gdb-feedstock?branchName=main">
-          </a>
-        </summary>
-        <table>
-          <thead><tr><th>Variant</th><th>Status</th></tr></thead>
-          <tbody><tr>
-              <td>linux_64_python3.10.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=19544&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-gdb-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.10.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_python3.11.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=19544&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-gdb-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.11.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_64_python3.12.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=19544&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-gdb-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.12.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_python3.10.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=19544&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-gdb-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.10.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_python3.11.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=19544&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-gdb-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.11.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_python3.12.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=19544&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cuda-gdb-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_python3.12.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </details>
+      <a href="https://github.com/conda-forge/cuda-gdb-feedstock/actions/workflows/conda-build.yml">
+        <img src="https://github.com/conda-forge/cuda-gdb-feedstock/actions/workflows/conda-build.yml/badge.svg?event=push&branch=main">
+      </a>
     </td>
   </tr>
 </table>
@@ -90,7 +37,6 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-cuda--gdb-green.svg)](https://anaconda.org/conda-forge/cuda-gdb) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cuda-gdb.svg)](https://anaconda.org/conda-forge/cuda-gdb) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cuda-gdb.svg)](https://anaconda.org/conda-forge/cuda-gdb) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cuda-gdb.svg)](https://anaconda.org/conda-forge/cuda-gdb) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-cuda--gdb--src-green.svg)](https://anaconda.org/conda-forge/cuda-gdb-src) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cuda-gdb-src.svg)](https://anaconda.org/conda-forge/cuda-gdb-src) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cuda-gdb-src.svg)](https://anaconda.org/conda-forge/cuda-gdb-src) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cuda-gdb-src.svg)](https://anaconda.org/conda-forge/cuda-gdb-src) |
 
 Installing cuda-gdb
 ===================
@@ -102,16 +48,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `cuda-gdb, cuda-gdb-src` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `cuda-gdb` can be installed with `conda`:
 
 ```
-conda install cuda-gdb cuda-gdb-src
+conda install cuda-gdb
 ```
 
 or with `mamba`:
 
 ```
-mamba install cuda-gdb cuda-gdb-src
+mamba install cuda-gdb
 ```
 
 It is possible to list all of the versions of `cuda-gdb` available on your platform with `conda`:
