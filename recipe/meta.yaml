@@ -23,10 +23,10 @@ source:
 
 build:
   number: 0
-  skip: true  # [osx or win or ppc64le]
-  # For the highest supported python, we also build the no-python variant
-  skip: true  # [py<38 or py>312]
-  skip: true  # [skip_python and (py!=312)]
+  # Combined into one key: conda-build ORs independent selector-tagged skips, but the
+  # recipe parsers conda-forge lints with read the YAML literally and reject the
+  # repeated key. For the highest supported python we also build the no-python variant.
+  skip: true  # [osx or win or ppc64le or py<38 or py>312 or (skip_python and (py!=312))]
 
 requirements:
   build:
