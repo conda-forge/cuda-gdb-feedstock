@@ -10,6 +10,8 @@
 {% set target_name = "x64" %}  # [win]
 {% set extension = "tar.xz" %}  # [not win]
 {% set extension = "zip" %}  # [win]
+{% set sha256 = "39df9b20ab6b6497bc67212577f4947f51e1e31a79516248b1563cd01de926ea" %}  # [linux64]
+{% set sha256 = "8c9ab9056bdb744550b5e9473b2d5d0161d5ce8ac74a7554f2a4f4a8708213b1" %}  # [aarch64]
 
 package:
   name: {{ name|lower }}-split
@@ -17,8 +19,7 @@ package:
 
 source:
   url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_gdb/{{ platform }}/cuda_gdb-{{ platform }}-{{ version }}-archive.{{ extension }}
-  sha256: 39df9b20ab6b6497bc67212577f4947f51e1e31a79516248b1563cd01de926ea  # [linux64]
-  sha256: 8c9ab9056bdb744550b5e9473b2d5d0161d5ce8ac74a7554f2a4f4a8708213b1  # [aarch64]
+  sha256: {{ sha256 }}
 
 build:
   number: 0
